@@ -1,19 +1,17 @@
-function objectMap(obj, func) {
+export function objectMap(obj, func) {
     return Object.keys(obj).map(func)
 };
 
-function removeDuplicates(array) {
+export function removeDuplicates(array) {
     return [...array].filter((item,
         index) => array.indexOf(item) === index);
 };
 
-function sortByTerm(data, term, size) {
-    return data.sort(function(a, b) {
-        return a.indexOf(term) <= b.indexOf(term) ? 1 : -1;
-    }).slice(0, size);
+export function sortByTerm(data, term, size) {
+    return data.sort((a, b) => a.indexOf(term) <= b.indexOf(term) ? 1 : -1).slice(0, size);
 };
 
-function validateMail(mailString) {
+export function validateMail(mailString) {
     const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (mailString.match(mailRegex)) {
         return true;
@@ -22,8 +20,7 @@ function validateMail(mailString) {
     }
 }
 
-function range(size, startAt = 0) {
-    //creates array of incrementing numbers or letters in alphabetic order of given size and starting from given number or letter (0 if not stated), works only for numbers and chars
+export function range(size, startAt = 0) {
     if (typeof startAt === "string" && startAt.length === 1) return String.fromCharCode(...range(size, startAt.charCodeAt(0))).split(
         ""
     );
@@ -31,16 +28,62 @@ function range(size, startAt = 0) {
     else return;
 }
 
-function sleep(ms) {
-    // freezes code execution for given time in milliseconds, used in async functions with await keyword
-    return new Promise((resolve) => setTimeout(resolve, ms));
+export function sleep(duration) {
+    return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-export {
-    objectMap,
-    removeDuplicates,
-    sortByTerm,
-    validateMail,
-    range,
-    sleep
+export function randInt(start = 0, end = 100) {
+    return Math.floor(Math.random() * (end - start + 1)) + start;
+}
+
+export function shuffle(array) {
+    let currentIndex = array.length,
+        randomIndex;
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]
+        ];
+    }
+    return array;
+}
+
+export function qs(selector, parent = document) {
+    return parent.querySelector(selector)
+}
+
+export function qsa(selector, parent = document) {
+    return [...parent.querySelectorAll(selector)]
+}
+
+export function sample(array) {
+    return array[randInt(0, array.length - 1)]
+}
+
+export function arrayToObjectWithLeadingKey(data, leadingKey) {
+    const newObject = {};
+    for (let element of data) {
+        const key = element[leadingKey];
+        newObject[key] = element;
+    }
+    return newObject
+}
+
+export function getValuesOfKeys(array, key) {
+    return array.map(element => element[key])
+}
+
+export function groupBy(array, key) {
+    return array.reduce((group, element) => {
+        const keyValue = element[key]
+        return {
+            ...group,
+            [keyValue]: [...(group[keyValue] ?? []), element]
+        }
+    }, {})
+}
+
+export function objectHardCopy(object) {
+    return Object.assign({}, object)
 }
