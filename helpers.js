@@ -61,7 +61,7 @@ export function sample(array) {
     return array[randInt(0, array.length - 1)]
 }
 
-export function arrayToObjectWithLeadingKey(data, leadingKey) {
+export function arrayToObject(data, leadingKey) {
     const newObject = {};
     for (let element of data) {
         const key = element[leadingKey];
@@ -86,4 +86,9 @@ export function groupBy(array, key) {
 
 export function objectHardCopy(object) {
     return Object.assign({}, object)
+}
+
+export function filterFromObject(object, property) {
+	const { [Object.keys(property)]: removedProperty, ...newObject } = object;
+	return newObject
 }
