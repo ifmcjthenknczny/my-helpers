@@ -11,6 +11,10 @@ export function sortFromTerm(data, term, size) {
     return data.sort((a, b) => a.indexOf(term) <= b.indexOf(term) ? 1 : -1).slice(0, size);
 };
 
+export function filterFromTerm (data, term, size) {
+    return data.filter(a => a >= term).slice(0, size);
+};
+
 export function validateMail(mailString) {
     const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (mailString.match(mailRegex)) {
