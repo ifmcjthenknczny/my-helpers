@@ -7,7 +7,7 @@ export function removeDuplicates(array) {
         index) => array.indexOf(item) === index);
 };
 
-export function sortByTerm(data, term, size) {
+export function sortFromTerm(data, term, size) {
     return data.sort((a, b) => a.indexOf(term) <= b.indexOf(term) ? 1 : -1).slice(0, size);
 };
 
@@ -88,7 +88,24 @@ export function objectHardCopy(object) {
     return Object.assign({}, object)
 }
 
-export function filterFromObject(object, property) {
+export function filterPropertyFromObject(object, property) {
 	const { [Object.keys(property)]: removedProperty, ...newObject } = object;
 	return newObject
+}
+
+export async function limitPromiseConcurrency(promises, batchSize) {
+    const promisesIterator = promises.entries();
+    async function doStuff(iterator) {
+        for (let [i, handler] of iterator) await handler
+    }
+    const promiseBatch = new Array(batchSize).fill(queueIterator).map(doStuff)
+    Promise.all(promiseBatch)
+}
+
+export function hasNumber(myString) {
+    return /\d/.test(myString);
+}
+
+export function capitlizeString(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
 }
