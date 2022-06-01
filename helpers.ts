@@ -1,27 +1,27 @@
-export function mapOver(obj: {}, func: () => any): any[] {
+export function mapOver(obj: {}, func: () => any) {
     return Object.keys(obj).map(func)
 };
 
-export function removeDuplicates(array: any[]): any[] {
+export function removeDuplicates(array: any[]) {
     return [...array].filter((item,
         index) => array.indexOf(item) === index);
 };
 
-export function filterFromTerm<T>(data: T[], term: T, size: number): T[] {
+export function filterFromTerm<T>(data: T[], term: T, size: number) {
     return data.filter(a => a >= term).slice(0, size);
 };
 
-export function validateMail(mail: string): boolean {
+export function validateMail(mail: string) {
     const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (mail.match(mailRegex)) return true;
     else return false;
 }
 
-export function rangeNumbers(size: number, start: number): number[] {
+export function rangeNumbers(size: number, start: number) {
     return [...Array(size).keys()].map(i => i + start);
 }
 
-export function rangeChars(size: number = 26, startChar: string = 'A'): string[] {
+export function rangeChars(size: number = 26, startChar: string = 'A') {
     if (startChar.length !== 1) throw new Error("Enter char of length 1.")
     return [...Array(size).keys()].map(i => String.fromCharCode(startChar.charCodeAt(0) + i));
 }
@@ -30,11 +30,11 @@ export function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-export function randInt(start: number = 0, end: number = 100): number {
+export function randInt(start: number = 0, end: number = 100) {
     return Math.floor(Math.random() * (end - start + 1)) + start;
 }
 
-export function shuffle(array: any[]): any[] {
+export function shuffle(array: any[]) {
     let currentIndex = array.length,
         randomIndex: number;
     while (currentIndex != 0) {
@@ -55,7 +55,7 @@ export function qsa(selector: string, parent: Document | Element = document) {
     return [...parent.querySelectorAll(selector)]
 }
 
-export function sample(array: any[]): any {
+export function sample(array: any[]) {
     return array[randInt(0, array.length - 1)]
 }
 
@@ -85,15 +85,15 @@ export async function limitPromiseConcurrency(promises: Promise<void>[], batchSi
     Promise.all(promiseBatch)
 }
 
-export function hasNumber(myString: string): boolean {
+export function hasNumber(myString: string) {
     return /\d/.test(myString);
 }
 
-export function capitalize(word: string): string {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+export function capitalize(word: string) {
+    return `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
 }
 
-export function clean(string: string): string {
+export function clean(string: string) {
     return string.trim().toLowerCase()
 }
 
