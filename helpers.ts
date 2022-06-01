@@ -55,7 +55,7 @@ export function qsa(selector: string, parent: Document | Element = document) {
     return [...parent.querySelectorAll(selector)]
 }
 
-export function sample(array: any[]) {
+export function getSample(array: any[]) {
     return array[randInt(0, array.length - 1)]
 }
 
@@ -97,9 +97,6 @@ export function clean(string: string) {
     return string.trim().toLowerCase()
 }
 
-// export function filterPropertyOut(object: {}, property: string | number) {
-//     const {
-//         [property]: removedProperty, ...newObject
-//     } = object;
-//     return newObject
-// }
+export function filterProperties(object: {}, properties: string[]) {
+    return Object.fromEntries(Object.entries(object).filter(([key, val]) => !properties.includes(key)));
+}

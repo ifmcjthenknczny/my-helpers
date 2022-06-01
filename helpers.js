@@ -48,7 +48,7 @@ export function qs(selector, parent = document) {
 export function qsa(selector, parent = document) {
     return [...parent.querySelectorAll(selector)];
 }
-export function sample(array) {
+export function getSample(array) {
     return array[randInt(0, array.length - 1)];
 }
 export function parseToObject(data, leadingKey) {
@@ -65,12 +65,6 @@ export function getValuesOfKey(array, key) {
 export function objectHardCopy(object) {
     return Object.assign({}, object);
 }
-// export function filterProperty(object: {}, property: string | number) {
-//     const {
-//         [property]: removedProperty, ...newObject
-//     } = object;
-//     return newObject
-// }
 export async function limitPromiseConcurrency(promises, batchSize) {
     const promisesIterator = promises.entries();
     async function doStuff(iterator) {
@@ -84,8 +78,11 @@ export function hasNumber(myString) {
     return /\d/.test(myString);
 }
 export function capitalize(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    return `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
 }
 export function clean(string) {
     return string.trim().toLowerCase();
+}
+export function filterProperties(object, properties) {
+    return Object.fromEntries(Object.entries(object).filter(([key, val]) => !properties.includes(key)));
 }
