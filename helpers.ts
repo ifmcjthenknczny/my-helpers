@@ -1,8 +1,8 @@
-export function mapOver(obj: {}, func: () => any) {
+export function mapOver<T>(obj: {}, func: () => T) {
     return Object.keys(obj).map(func)
 };
 
-export function removeDuplicates(array: any[]) {
+export function removeDuplicates<T>(array: T[]) {
     return [...array].filter((item,
         index) => array.indexOf(item) === index);
 };
@@ -34,7 +34,7 @@ export function randInt(start: number = 0, end: number = 100) {
     return Math.floor(Math.random() * (end - start + 1)) + start;
 }
 
-export function shuffle(array: any[]) {
+export function shuffle<T>(array: T[]) {
     let currentIndex = array.length,
         randomIndex: number;
     while (currentIndex != 0) {
@@ -55,11 +55,11 @@ export function qsa(selector: string, parent: Document | Element = document) {
     return [...parent.querySelectorAll(selector)]
 }
 
-export function getSample(array: any[]) {
+export function getSample<T>(array: T[]) {
     return array[randInt(0, array.length - 1)]
 }
 
-export function parseToObject(data: any[], leadingKey: number | string) {
+export function parseToObject<T>(data: T[], leadingKey: number | string) {
     const newObject = {};
     for (let element of data) {
         const key = element[leadingKey];
@@ -68,7 +68,7 @@ export function parseToObject(data: any[], leadingKey: number | string) {
     return newObject
 }
 
-export function getValuesOfKey(array: {}[], key: any) {
+export function getValuesOfKey<T>(array: {}[], key: any) {
     return array.map(element => element[key])
 }
 
