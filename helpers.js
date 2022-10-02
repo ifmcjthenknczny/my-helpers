@@ -1,46 +1,48 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-export function mapOver(obj, func) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.filterProperties = exports.clean = exports.capitalize = exports.hasNumber = exports.limitPromiseConcurrency = exports.objectHardCopy = exports.getValuesOfKey = exports.parseToObject = exports.getSample = exports.qsa = exports.qs = exports.shuffle = exports.randInt = exports.sleep = exports.rangeChars = exports.rangeNumbers = exports.validateMail = exports.filterFromTerm = exports.removeDuplicates = exports.mapOver = void 0;
+function mapOver(obj, func) {
     return Object.keys(obj).map(func);
 }
+exports.mapOver = mapOver;
 ;
-export function removeDuplicates(array) {
+function removeDuplicates(array) {
     return [...array].filter((item, index) => array.indexOf(item) === index);
 }
+exports.removeDuplicates = removeDuplicates;
 ;
-export function filterFromTerm(data, term, size) {
+function filterFromTerm(data, term, size) {
     return data.filter(a => a >= term).slice(0, size);
 }
+exports.filterFromTerm = filterFromTerm;
 ;
-export function validateMail(mail) {
+function validateMail(mail) {
     const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (mail.match(mailRegex))
         return true;
     else
         return false;
 }
-export function rangeNumbers(size, start) {
+exports.validateMail = validateMail;
+function rangeNumbers(size, start) {
     return [...Array(size).keys()].map(i => i + start);
 }
-export function rangeChars(size = 26, startChar = 'A') {
+exports.rangeNumbers = rangeNumbers;
+function rangeChars(size = 26, startChar = 'A') {
     if (startChar.length !== 1)
         throw new Error("Enter char of length 1.");
     return [...Array(size).keys()].map(i => String.fromCharCode(startChar.charCodeAt(0) + i));
 }
-export function sleep(duration) {
+exports.rangeChars = rangeChars;
+function sleep(duration) {
     return new Promise(resolve => setTimeout(resolve, duration));
 }
-export function randInt(start = 0, end = 100) {
+exports.sleep = sleep;
+function randInt(start = 0, end = 100) {
     return Math.floor(Math.random() * (end - start + 1)) + start;
 }
-export function shuffle(array) {
+exports.randInt = randInt;
+function shuffle(array) {
     let currentIndex = array.length, randomIndex;
     while (currentIndex != 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -51,16 +53,20 @@ export function shuffle(array) {
     }
     return array;
 }
-export function qs(selector, parent = document) {
+exports.shuffle = shuffle;
+function qs(selector, parent = document) {
     return parent.querySelector(selector);
 }
-export function qsa(selector, parent = document) {
+exports.qs = qs;
+function qsa(selector, parent = document) {
     return [...parent.querySelectorAll(selector)];
 }
-export function getSample(array) {
+exports.qsa = qsa;
+function getSample(array) {
     return array[randInt(0, array.length - 1)];
 }
-export function parseToObject(data, leadingKey) {
+exports.getSample = getSample;
+function parseToObject(data, leadingKey) {
     const newObject = {};
     for (let element of data) {
         const key = element[leadingKey];
@@ -68,34 +74,38 @@ export function parseToObject(data, leadingKey) {
     }
     return newObject;
 }
-export function getValuesOfKey(array, key) {
+exports.parseToObject = parseToObject;
+function getValuesOfKey(array, key) {
     return array.map(element => element[key]);
 }
-export function objectHardCopy(object) {
+exports.getValuesOfKey = getValuesOfKey;
+function objectHardCopy(object) {
     return Object.assign({}, object);
 }
-export function limitPromiseConcurrency(promises, batchSize) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const promisesIterator = promises.entries();
-        function doStuff(iterator) {
-            return __awaiter(this, void 0, void 0, function* () {
-                for (let [i, handler] of iterator)
-                    yield handler;
-            });
-        }
-        const promiseBatch = new Array(batchSize).fill(promisesIterator).map(doStuff);
-        Promise.all(promiseBatch);
-    });
+exports.objectHardCopy = objectHardCopy;
+async function limitPromiseConcurrency(promises, batchSize) {
+    const promisesIterator = promises.entries();
+    async function doStuff(iterator) {
+        for (let [i, handler] of iterator)
+            await handler;
+    }
+    const promiseBatch = new Array(batchSize).fill(promisesIterator).map(doStuff);
+    Promise.all(promiseBatch);
 }
-export function hasNumber(myString) {
+exports.limitPromiseConcurrency = limitPromiseConcurrency;
+function hasNumber(myString) {
     return /\d/.test(myString);
 }
-export function capitalize(word) {
+exports.hasNumber = hasNumber;
+function capitalize(word) {
     return `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
 }
-export function clean(string) {
+exports.capitalize = capitalize;
+function clean(string) {
     return string.trim().toLowerCase();
 }
-export function filterProperties(object, properties) {
+exports.clean = clean;
+function filterProperties(object, properties) {
     return Object.fromEntries(Object.entries(object).filter(([key, val]) => !properties.includes(key)));
 }
+exports.filterProperties = filterProperties;

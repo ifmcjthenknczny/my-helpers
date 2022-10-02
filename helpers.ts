@@ -1,40 +1,28 @@
-export function mapOver<T>(obj: {}, func: () => T) {
-    return Object.keys(obj).map(func)
-};
 
-export function removeDuplicates<T>(array: T[]) {
-    return [...array].filter((item,
-        index) => array.indexOf(item) === index);
-};
 
 export function filterFromTerm<T>(data: T[], term: T, size: number) {
     return data.filter(a => a >= term).slice(0, size);
 };
 
-export function validateMail(mail: string) {
-    const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    if (mail.match(mailRegex)) return true;
-    else return false;
-}
-
-export function rangeNumbers(size: number, start: number) {
-    return [...Array(size).keys()].map(i => i + start);
-}
-
-export function rangeChars(size: number = 26, startChar: string = 'A') {
+export const rangeChars = (size: number = 26, startChar: string = 'A') => {
     if (startChar.length !== 1) throw new Error("Enter char of length 1.")
     return [...Array(size).keys()].map(i => String.fromCharCode(startChar.charCodeAt(0) + i));
 }
+export const capitalize = (text: string) => `${text.charAt(0).toUpperCase()}${text.slice(1)}`
+export const hasNumber = (text: string) => /\d/.test(text)
+export const isValidEmail = (mail: string) => !!mail.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
+export const isObjectEqual = (obj1: {}, obj2: {}) => JSON.stringify(obj1) === JSON.stringify(obj2)
+export const objectHardCopy = (object: {}) => Object.assign({}, object)
+export const objectMapOver = (obj: {}, func: () => any) => Object.keys(obj).map(func)
+export const randInt = (end: number, start: number = 0) => Math.floor(Math.random() * (end - start + 1)) + start
+export const range = (size: number, start: number) => [...Array(size).keys()].map(i => i + start)
+export const removeDuplicates = (array: []) => [...array].filter((item, index) => array.indexOf(item) === index);
+export const sleep = (miliseconds: number) => new Promise(resolve => setTimeout(resolve, miliseconds))
 
-export function sleep(duration: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, duration));
-}
+export const cleanString = (text: string) => text.trim().toLowerCase()
+export const filterProperties = (object: {}, properties: string[]) => Object.fromEntries(Object.entries(object).filter(([key, val]) => !properties.includes(key)))
 
-export function randInt(start: number = 0, end: number = 100) {
-    return Math.floor(Math.random() * (end - start + 1)) + start;
-}
-
-export function shuffle<T>(array: T[]) {
+export const shuffle = (array: []) => {
     let currentIndex = array.length,
         randomIndex: number;
     while (currentIndex != 0) {
@@ -47,17 +35,10 @@ export function shuffle<T>(array: T[]) {
     return array;
 }
 
-export function qs(selector: string, parent: Document | Element = document): Element {
-    return parent.querySelector(selector)
-}
+export function qs = (selector: string, parent: Document | Element = document): Element | null => parent.querySelector(selector)
+export function qsa = (selector: string, parent: Document | Element = document): Element[] | null => [...parent.querySelectorAll(selector)]
 
-export function qsa(selector: string, parent: Document | Element = document) {
-    return [...parent.querySelectorAll(selector)]
-}
-
-export function getSample<T>(array: T[]) {
-    return array[randInt(0, array.length - 1)]
-}
+export const getSample = (array: []) => array[randInt(0, array.length - 1)]
 
 export function parseToObject<T>(data: T[], leadingKey: number | string) {
     const newObject = {};
@@ -68,12 +49,8 @@ export function parseToObject<T>(data: T[], leadingKey: number | string) {
     return newObject
 }
 
-export function getValuesOfKey<T>(array: {}[], key: any) {
+export function getValuesOfKey (array: {}[], key: any) {
     return array.map(element => element[key])
-}
-
-export function objectHardCopy(object: {}) {
-    return Object.assign({}, object)
 }
 
 export async function limitPromiseConcurrency(promises: Promise<void>[], batchSize: number): Promise<void> {
@@ -85,18 +62,9 @@ export async function limitPromiseConcurrency(promises: Promise<void>[], batchSi
     Promise.all(promiseBatch)
 }
 
-export function hasNumber(myString: string) {
-    return /\d/.test(myString);
-}
-
-export function capitalize(word: string) {
-    return `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
-}
-
-export function clean(string: string) {
-    return string.trim().toLowerCase()
-}
-
-export function filterProperties(object: {}, properties: string[]) {
-    return Object.fromEntries(Object.entries(object).filter(([key, val]) => !properties.includes(key)));
+export function clearAllIntervals() {
+	const INTERVAL_ID = setInterval(function(){}, Number.MAX_SAFE_INTEGER);
+	for (let i = 1; i < +INTERVAL_ID; i++) {
+	  clearInterval(i);
+	}
 }
