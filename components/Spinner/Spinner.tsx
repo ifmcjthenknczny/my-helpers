@@ -1,6 +1,6 @@
 import styles from './Spinner.module.scss';
-import { classNames } from '../../utils';
 import React from 'react'
+import classNames from 'classnames';
 
 const DOT_COUNT = 3;
 

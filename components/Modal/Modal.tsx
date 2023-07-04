@@ -1,6 +1,6 @@
-import { classNames } from "../../utils";
 import styles from "./Modal.module.scss";
-import React from 'react'
+import React, { MouseEvent } from 'react'
+import classNames from "classnames";
 
 export type Props = {
     children: React.ReactNode;
@@ -13,7 +13,7 @@ const Modal = ({ children, isOpen, onClose, className }: Props) => {
     if (!isOpen) {
         return <></>
     }
-    const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
         if (event.target === event.currentTarget) {
             onClose();
         }
