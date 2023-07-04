@@ -1,0 +1,45 @@
+@import "../../sass/variables.scss";
+@import "../../sass/colors.scss";
+
+$dotSize: 20px;
+$delay: 0.2s;
+$animationTime: $delay * 4;
+$dotHorizontalMargin: 5px;
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  width: $dotSize;
+  height: $dotSize;
+  background-color: $gray1;
+  border-radius: 50%;
+  margin: 0 $dotHorizontalMargin;
+  animation: spinner $animationTime infinite ease-in-out;
+  &:nth-child(2) {
+    animation-delay: $delay;
+  }
+  &:nth-child(3) {
+    animation-delay: $delay * 2;
+  }
+}
+.fullScreen {
+  height: 100%;
+  width: 100%;
+  min-height: $fullscreenContentHeight;
+}
+
+@keyframes spinner {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

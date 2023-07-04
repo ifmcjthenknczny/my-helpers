@@ -1,0 +1,23 @@
+@import '../../sass/devices.scss';
+@import "../../sass/colors.scss";
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: $gray5;
+  padding: 1rem;
+  border-radius: 5px;
+  @include mobile {
+    width: 100%;
+  }
+}
