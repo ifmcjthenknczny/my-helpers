@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useBusy = (
+const useQueryStatus = (
   initialBusyState = false,
   onError?: (e: any) => void
 ): [boolean, <T extends (...args: any[]) => any>(f: T) => T] => {
@@ -23,4 +23,4 @@ const useBusy = (
   return [isBusy, busyWrapper];
 };
 
-export default useBusy
+export default useQueryStatus
