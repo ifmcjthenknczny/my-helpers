@@ -1,11 +1,11 @@
 export const objectDeepEqual = (obj1: {}, obj2: {}) =>
   JSON.stringify(obj1) === JSON.stringify(obj2);
 
-export const objectMap = (obj: {}, func: () => any) =>
-  Object.keys(obj).map(func);
-
 export const objectDeepCopy = <T>(object: T) =>
   JSON.parse(JSON.stringify(object));
+
+export const objectMap = (obj: {}, func: (key: string) => any) =>
+  Object.keys(obj).map(func);
 
 export const getValuesOfKey = <T>(array: T[], key: keyof T) =>
   array.map((element) => element[key]);
@@ -23,7 +23,8 @@ export const removeProperty = <T extends object, K extends keyof T>(
   return rest;
 };
 
-export const omit = <T extends { [key: string]: any }, K extends keyof T>( // eslint-disable-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const omit = <T extends { [key: string]: any }, K extends keyof T>(
   obj: T,
   keysToOmit: K[]
 ): Omit<T, K> =>
@@ -34,7 +35,8 @@ export const omit = <T extends { [key: string]: any }, K extends keyof T>( // es
     return { ...newObj, [key]: obj[key] };
   }, {} as Omit<T, K>);
 
-export const pick = <T extends { [key: string]: any }, K extends keyof T>( // eslint-disable-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const pick = <T extends { [key: string]: any }, K extends keyof T>(
   obj: T,
   keysToPick: K[]
 ): Pick<T, K> =>
@@ -44,3 +46,9 @@ export const pick = <T extends { [key: string]: any }, K extends keyof T>( // es
     }
     return newObj;
   }, {} as Pick<T, K>);
+
+export const modifyObjectValues = (obj: {}, func: (value: any) => any) =>
+  Object.entries(obj).reduce((acc, [key, value]) => {
+    acc[key] = func(value);
+    return acc;
+  }, {} as any);
