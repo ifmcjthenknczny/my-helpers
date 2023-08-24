@@ -1,6 +1,3 @@
-export const objectDeepEqual = (obj1: {}, obj2: {}) =>
-  JSON.stringify(obj1) === JSON.stringify(obj2);
-
 export const objectDeepCopy = <T>(object: T) =>
   JSON.parse(JSON.stringify(object));
 
