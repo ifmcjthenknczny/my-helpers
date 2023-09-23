@@ -26,3 +26,6 @@ export const splitArrayByCondition = <T>(
     [[], []]
   );
 };
+
+
+export const sum = (numbers: number[]) => numbers.reduce((acc, current) => acc + current, 0);
