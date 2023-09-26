@@ -1,23 +1,19 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
-import axios from 'axios';
+import axios from "axios";
 
-export const asyncHandler = (handler: RequestHandler): RequestHandler => {
-  return async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
+export const asyncHandler =
+  (handler: RequestHandler): RequestHandler =>
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await handler(req, res, next);
     } catch (e) {
-      const { message, statusCode = 400 } = e as {
+      const { message, statusCode = 500 } = e as {
         message: string;
         statusCode: number;
       };
       res.status(statusCode).json({ error: message });
     }
   };
-};
 
 // interface RequestOptions<M extends keyof Queries = 'GET'> {
 //   method?: M;
@@ -67,4 +63,19 @@ export const query = async <
       : await axios({ url, method, data: body });
 
   return data;
+};
+
+type QueryParams = {
+  [key: string]: string | number | boolean | string[] | number[] | boolean[];
+};
+
+export const queryParamsToString = (queryParams: QueryParams) => {
+  const partialStrings = Object.entries(queryParams)
+    .map(([key, value]) =>
+      Array.isArray(value)
+        ? value.map((v) => `${key}[]=${v}`)
+        : `${key}=${value}`
+    )
+    .flat();
+  return partialStrings.join("&");
 };
