@@ -6,6 +6,6 @@ export const safeDivide = (dividend: number, divisor: number, returnZero?: true)
 }
 
 export const roundNumber = (number: number, decimalPlaces: number) => {
-  const multiplier = Math.pow(10, decimalPlaces);
-  return Math.round(number * multiplier) / multiplier;
-};
+    const multiplier = Math.pow(10, decimalPlaces)
+    return Math.round(number * multiplier) / multiplier
+}

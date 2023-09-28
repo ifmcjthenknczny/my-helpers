@@ -4,7 +4,7 @@ const useAlert = (disappearTime: number, autoDisappear?: true): [string | undefi
     const [alert, setAlert] = useState<string>()
     const handleAlert = (text?: string) => setAlert(text)
     const handleAlertDebounce = (text?: string) => {
-        setAlert(text);
+        setAlert(text)
         setTimeout(() => setAlert(undefined), disappearTime)
     }
     if (autoDisappear) {

@@ -1,0 +1,3 @@
+// keywords to avoid in vscode when regular search, Typescript/React/Sass environment
+
+.json, .txt, .html, .yaml, .lock, .yml, .log, .svg, .js, .tpl, .map, .xml, .info, .snap, fixtures, node_modules, .css, .patch

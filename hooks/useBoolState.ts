@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 const useBoolState = (
-  initialState: boolean
+    initialState: boolean
 ): [boolean, () => void, () => void] => {
-  const [state, setState] = useState(initialState);
-  const setFalse = () => setState(false);
-  const setTrue = () => setState(true);
-  return [state, setTrue, setFalse];
-};
+    const [state, setState] = useState(initialState)
+    const setFalse = () => setState(false)
+    const setTrue = () => setState(true)
+    return [state, setTrue, setFalse]
+}
 
-export default useBoolState;
+export default useBoolState

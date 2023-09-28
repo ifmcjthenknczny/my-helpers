@@ -1,0 +1,7 @@
+node_modules
+Deltologic Tech Task.pdf
+todo.txt
+.github
+.eslintrc.json
+jest.config.ts
+.gitignore

@@ -1,31 +1,31 @@
 export const removeDuplicates = (array: []) =>
-  [...array].filter((item, index) => array.indexOf(item) === index);
+    [...array].filter((item, index) => array.indexOf(item) === index)
 
 export const removeDuplicatesAndExclude = <T>(
-  array: T[],
-  excludeArray: T[]
+    array: T[],
+    excludeArray: T[]
 ): T[] =>
-  array.filter(
-    (value, index, self) =>
-      self.indexOf(value) === index && !excludeArray.includes(value)
-  );
+        array.filter(
+            (value, index, self) =>
+                self.indexOf(value) === index && !excludeArray.includes(value)
+        )
 
 export const splitArrayByCondition = <T>(
-  array: T[],
-  condition: (item: T) => boolean
+    array: T[],
+    condition: (item: T) => boolean
 ): [T[], T[]] => {
-  return array.reduce(
-    (result: [T[], T[]], item: T) => {
-      if (condition(item)) {
-        result[0].push(item);
-      } else {
-        result[1].push(item);
-      }
-      return result;
-    },
-    [[], []]
-  );
-};
+    return array.reduce(
+        (result: [T[], T[]], item: T) => {
+            if (condition(item)) {
+                result[0].push(item)
+            } else {
+                result[1].push(item)
+            }
+            return result
+        },
+        [[], []]
+    )
+}
 
 
-export const sum = (numbers: number[]) => numbers.reduce((acc, current) => acc + current, 0);
+export const sum = (numbers: number[]) => numbers.reduce((acc, current) => acc + current, 0)

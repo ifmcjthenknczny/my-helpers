@@ -1,4 +1,4 @@
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { TypedUseSelectorHook, useSelector } from 'react-redux'
 
 const useLocalSelector: TypedUseSelectorHook<AppState> = useSelector
 
