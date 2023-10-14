@@ -7,7 +7,7 @@ export const limitPromiseConcurrency = async (
 ) => {
     const promisesIterator = promises.entries()
     async function doStuff(iterator: IterableIterator<[number, Promise<void>]>) {
-        for (const [i, handler] of iterator) await handler
+        for (const [, handler] of iterator) await handler
     }
     const promiseBatch = new Array(batchSize).fill(promisesIterator).map(doStuff)
     Promise.all(promiseBatch)

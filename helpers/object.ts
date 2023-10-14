@@ -1,7 +1,7 @@
 export const objectDeepCopy = <T>(object: T) =>
     JSON.parse(JSON.stringify(object))
 
-export const objectMap = (obj: object, func: (key: string) => any) =>
+export const objectMap = (obj: object, func: (key: string) => any) => // eslint-disable-line @typescript-eslint/no-explicit-any
     Object.keys(obj).map(func)
 
 export const getValuesOfKey = <T>(array: T[], key: keyof T) =>
@@ -44,8 +44,8 @@ export const pick = <T extends { [key: string]: any }, K extends keyof T>(
             return newObj
         }, {} as Pick<T, K>)
 
-export const modifyObjectValues = (obj: object, func: (value: any) => any) =>
+export const modifyObjectValues = (obj: object, func: (value: any) => any) => // eslint-disable-line @typescript-eslint/no-explicit-any
     Object.entries(obj).reduce((acc, [key, value]) => {
         acc[key] = func(value)
         return acc
-    }, {} as any)
+    }, {} as any) // eslint-disable-line @typescript-eslint/no-explicit-any

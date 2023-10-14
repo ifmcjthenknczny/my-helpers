@@ -10,11 +10,10 @@ export const removeDuplicatesAndExclude = <T>(
                 self.indexOf(value) === index && !excludeArray.includes(value)
         )
 
-export const splitArrayByCondition = <T>(
+export const splitByCondition = <T>(
     array: T[],
     condition: (item: T) => boolean
-): [T[], T[]] => {
-    return array.reduce(
+): [T[], T[]] => array.reduce(
         (result: [T[], T[]], item: T) => {
             if (condition(item)) {
                 result[0].push(item)
@@ -25,7 +24,10 @@ export const splitArrayByCondition = <T>(
         },
         [[], []]
     )
-}
 
+export const splitByIndex = <T>(
+    array: T[],
+    breakpoint: number
+) => [array.slice(0, breakpoint), array.slice(breakpoint)]
 
 export const sum = (numbers: number[]) => numbers.reduce((acc, current) => acc + current, 0)

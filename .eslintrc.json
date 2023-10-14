@@ -15,7 +15,8 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
         "indent": [
