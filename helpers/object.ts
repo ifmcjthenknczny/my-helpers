@@ -7,6 +7,15 @@ export const objectMap = (obj: object, func: (key: string) => any) => // eslint-
 export const getValuesOfKey = <T>(array: T[], key: keyof T) =>
     array.map((element) => element[key])
 
+export const getKeyByValue = (object: {[key: string]: any}, value: any): string | undefined => {
+    for (const [key, val] of Object.entries(object)) {
+        if (val === value) {
+            return key
+        }
+    }
+    return undefined
+}
+
 export const filterProperties = (object: object, properties: string[]) =>
     Object.fromEntries(
         Object.entries(object).filter(([key]) => !properties.includes(key))
