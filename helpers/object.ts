@@ -7,7 +7,7 @@ export const objectMap = (obj: object, func: (key: string) => any) => // eslint-
 export const getValuesOfKey = <T>(array: T[], key: keyof T) =>
     array.map((element) => element[key])
 
-export const getKeyByValue = (object: {[key: string]: any}, value: any): string | undefined => {
+export const getKeyByValue = (object: {[key: string]: any}, value: any): string | undefined => { // eslint-disable-line @typescript-eslint/no-explicit-any
     for (const [key, val] of Object.entries(object)) {
         if (val === value) {
             return key
