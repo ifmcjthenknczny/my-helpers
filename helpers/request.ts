@@ -1,5 +1,7 @@
-import { Request, Response, NextFunction, RequestHandler } from 'express'
+import { NextFunction, Request, RequestHandler, Response } from 'express'
+
 import axios from 'axios'
+import { removeUndefinedOrNull } from './object'
 
 export const asyncHandler =
   (handler: RequestHandler): RequestHandler =>
@@ -66,11 +68,12 @@ export const query = async <
 }
 
 type QueryParams = {
-  [key: string]: string | number | boolean | string[] | number[] | boolean[];
+  [key: string]: string | number | boolean | string[] | number[] | boolean[] | undefined | null;
 };
 
 export const queryParamsToString = (queryParams: QueryParams) => {
-    const partialStrings = Object.entries(queryParams)
+    const filteredQueryParams = removeUndefinedOrNull(queryParams)
+    const partialStrings = Object.entries(filteredQueryParams)
         .map(([key, value]) =>
             Array.isArray(value)
                 ? value.map((v) => `${key}[]=${v}`)

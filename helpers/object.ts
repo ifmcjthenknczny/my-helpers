@@ -58,3 +58,13 @@ export const modifyObjectValues = (obj: object, func: (value: any) => any) => //
         acc[key] = func(value)
         return acc
     }, {} as any) // eslint-disable-line @typescript-eslint/no-explicit-any
+
+export const removeUndefinedOrNull = (obj: {[key: string]: any}) => { // eslint-disable-line @typescript-eslint/no-explicit-any
+    return Object.entries(obj)
+        .reduce((acc, [key, value]) => {
+            if(value !== undefined && value !== null) {
+                acc[key] = value
+            }
+            return acc
+        }, {} as {[key: string]: any}) // eslint-disable-line @typescript-eslint/no-explicit-any
+}

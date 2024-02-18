@@ -46,21 +46,21 @@ export const randPesel = (
 }
 
 export const generatePassword = (length: number) => {
-    const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-    const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const numbers = '0123456789';
-    const symbols = '!@#$%^&*()_+=-';
-    const all = lowerCaseLetters + upperCaseLetters + numbers + symbols;
+    const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
+    const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const numbers = '0123456789'
+    const symbols = '!@#$%^&*()_+=-'
+    const all = lowerCaseLetters + upperCaseLetters + numbers + symbols
 
-    let password = '';
-    password += lowerCaseLetters.charAt(Math.floor(Math.random() * lowerCaseLetters.length));
-    password += upperCaseLetters.charAt(Math.floor(Math.random() * upperCaseLetters.length));
-    password += numbers.charAt(Math.floor(Math.random() * numbers.length));
-    password += symbols.charAt(Math.floor(Math.random() * symbols.length));
+    let password = ''
+    password += lowerCaseLetters.charAt(Math.floor(Math.random() * lowerCaseLetters.length))
+    password += upperCaseLetters.charAt(Math.floor(Math.random() * upperCaseLetters.length))
+    password += numbers.charAt(Math.floor(Math.random() * numbers.length))
+    password += symbols.charAt(Math.floor(Math.random() * symbols.length))
 
     for (let i = 4; i < length; i++) {
-        password += all.charAt(Math.floor(Math.random() * all.length));
+        password += all.charAt(Math.floor(Math.random() * all.length))
     }
 
-    return password.split('').sort(() => 0.5 - Math.random()).join('');
+    return password.split('').sort(() => 0.5 - Math.random()).join('')
 }
