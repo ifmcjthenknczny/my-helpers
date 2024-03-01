@@ -1,21 +1,19 @@
 export const randInt = (end: number, start: number = 0) =>
     Math.floor(Math.random() * (end - start + 1)) + start
 
+export const randomChar = (string: string) => string.charAt(Math.floor(Math.random() * string.length))
+
 export const randElement = (array: []) => array[randInt(0, array.length - 1)]
 
 export const shuffle = (array: []) => {
-    let currentIndex = array.length,
-        randomIndex: number
-    while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex)
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex],
-            array[currentIndex],
-        ]
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]
     }
     return array
 }
+
+export const shuffleString = (string: string) => string.split('').sort(() => 0.5 - Math.random()).join('')
 
 export const randNip = () => {
     const randomInts = new Array(9).map(() => randInt(9))
@@ -48,19 +46,19 @@ export const randPesel = (
 export const generatePassword = (length: number) => {
     const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
     const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    const numbers = '0123456789'
+    const digits = '0123456789'
     const symbols = '!@#$%^&*()_+=-'
-    const all = lowerCaseLetters + upperCaseLetters + numbers + symbols
+    const all = lowerCaseLetters + upperCaseLetters + digits + symbols
 
     let password = ''
-    password += lowerCaseLetters.charAt(Math.floor(Math.random() * lowerCaseLetters.length))
-    password += upperCaseLetters.charAt(Math.floor(Math.random() * upperCaseLetters.length))
-    password += numbers.charAt(Math.floor(Math.random() * numbers.length))
-    password += symbols.charAt(Math.floor(Math.random() * symbols.length))
+    password += randomChar(lowerCaseLetters)
+    password += randomChar(upperCaseLetters)
+    password += randomChar(digits)
+    password += randomChar(symbols)
 
-    for (let i = 4; i < length; i++) {
-        password += all.charAt(Math.floor(Math.random() * all.length))
+    for (let i = password.length; i < length; i++) {
+        password += randomChar(all)
     }
 
-    return password.split('').sort(() => 0.5 - Math.random()).join('')
+    return shuffleString(password)
 }
